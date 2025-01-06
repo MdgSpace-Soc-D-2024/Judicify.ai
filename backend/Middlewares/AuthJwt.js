@@ -16,4 +16,12 @@ const ensureAuthenticated = (req, res, next) => {
     }
 }
 
+const isJudge = (req, res, next) => {
+    if (!req.user || !req.user.judge) {
+        return res.status(403).json({ message: 'Access restricted to judges only' });
+    }
+    next();
+};
+
 module.exports = ensureAuthenticated;
+module.exports = isJudge;

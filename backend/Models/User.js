@@ -14,6 +14,10 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
+    },
+    judge:{
+        type: Boolean,
+        default: false
     }
     
 });

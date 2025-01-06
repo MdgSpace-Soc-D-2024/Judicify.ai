@@ -14,7 +14,7 @@ const signup =async (req, res) => {
         userModel.password = await bcrypt.hash(password, 10)
         await userModel.save()
         const jwtToken = jwt.sign(
-            {email: userModel.email, _id:userModel._id},
+            {email: userModel.email, _id:userModel._id, judge:user.judge},
             process.env.JWT_SECRET,
             {expiresIn: '1h'}
         )
@@ -48,7 +48,7 @@ const login =async (req, res) => {
             .json({message: "User not exists, Check email and password OR signup first", success: false})
         }
         const jwtToken = jwt.sign(
-            {email: user.email, _id:user._id},
+            {email: user.email, _id:user._id, judge:user.judge},
             process.env.JWT_SECRET,
             {expiresIn: '1h'}
         )
@@ -58,7 +58,8 @@ const login =async (req, res) => {
                 success: true,
                 jwtToken,
                 email,
-                name: user.name
+                name: user.name,
+                judge: user.judge
             })
     }catch (err){
         res.status(500)
