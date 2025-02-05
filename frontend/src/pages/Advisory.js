@@ -22,6 +22,7 @@ function Advisory(){
         navigate('/home')
     }
 
+
     return (
         <div>
             <h1>Welcome to Advisory Section {loggedinUser} !</h1>

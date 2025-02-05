@@ -15,12 +15,12 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    judge:{
+    judge: {
         type: Boolean,
         default: false
     }
     
 });
 
-const UserModel = mongoose.model('users', UserSchema);
+const UserModel = mongoose.model('Users', UserSchema);
 module.exports = UserModel;

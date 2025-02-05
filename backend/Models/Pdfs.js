@@ -1,29 +1,29 @@
 const mongoose = require ('mongoose')
 const Schema = mongoose.Schema;
 
-const messageSchema = new Schema({
+const pdfFileSchema = new Schema({
     roomId:{
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Room', 
         required: true
     },
     sender:{
-        type: mongoose.Schema.Types.Mixed, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', 
         required: true
     },
-    message:{
+    fileName:{
         type: String,
         required: true
     },
-    system: { 
-        type: Boolean, 
-        default: false 
+    fileData:{
+        type: Buffer,
+        required: true
     },
-    createdAt: { 
+    uploadedAt: { 
         type: Date, 
         default: Date.now 
     }
 })
 
-module.exports = mongoose.model('RMessages', messageSchema);
+module.exports = mongoose.model('Pdfs', pdfFileSchema);

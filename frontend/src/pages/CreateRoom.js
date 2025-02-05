@@ -13,6 +13,7 @@ function CreateR() {
 
     useEffect(() => {
             const token = localStorage.getItem('jwtToken');
+            console.log(token);
             if (token) {
                 try {
                     const decodedPayload = jwtDecode(token);
@@ -25,22 +26,21 @@ function CreateR() {
             }
         }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const token = localStorage.getItem('jwtToken');
-            const response = await fetch('http://localhost:1818/create-room/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ caseId, participants, scheduledTime, judgeId })
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            try {
+                const response = await fetch('http://localhost:1818/rooms/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `${localStorage.getItem('jwtToken')}`
+                    },
+                    body: JSON.stringify({ caseId, participants, scheduledTime, judgeId })
             });
-
+                
             const result = await response.json();
-            if (result.success === true) {
-                // navigate('/room')
+            if (result.success) {
+                navigate('/room');
                 handleSuccess(result.message);
             } else {
                 handleError(result.message);

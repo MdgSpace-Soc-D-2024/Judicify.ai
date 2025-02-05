@@ -17,7 +17,8 @@ const RefreshHandler = ({ setIsAuthenticated }) => {
                     if (
                         location.pathname === '/' ||
                         location.pathname === '/login' ||
-                        location.pathname === '/signup'
+                        location.pathname === '/signup' ||
+                        location.pathname === '/room'
                     ) {
                         navigate('/home');
                     }

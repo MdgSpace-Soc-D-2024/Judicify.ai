@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { handleSuccess } from '../utils'
-import { ToastContainer } from 'react-toastify'
-function Home(){
-    const [loggedinUser, setLoggedInUser]= useState("")
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { handleSuccess} from '../utils';
+import { ToastContainer } from 'react-toastify';
+
+function Home() {
+    const [loggedinUser, setLoggedInUser] = useState("");
     const navigate = useNavigate();
+
     useEffect(() => {
-        setLoggedInUser(localStorage.getItem('loggedinUser'))
-    }, [])
+        setLoggedInUser(localStorage.getItem('loggedinUser'));
+    }, []);
 
     const handleLogout = (e) => {
-        localStorage.removeItem('loggedinUser')
-        localStorage.removeItem('jwtToken')
-        handleSuccess('User logged out!')
-        setTimeout(()=>{
-            navigate('/login')
-        }, 1000)
-    }
+        localStorage.removeItem('loggedinUser');
+        localStorage.removeItem('jwtToken');
+        handleSuccess('User logged out!');
+        setTimeout(() => {
+            navigate('/login');
+        }, 1000);
+    };
 
     const handleFeature1 = (e) => {
-        navigate('/room')
-    }
+        navigate('/room/');
+    };
 
     const handleFeature2 = (e) => {
-        navigate('/advisory')
-    }
+        navigate('/advisory');
+    };
+
     return (
         <div>
             <h1>Welcome {loggedinUser} !</h1>
@@ -32,9 +35,12 @@ function Home(){
             <br /><br />
             <button onClick={handleFeature1}>Join or Create Room</button>
             <button onClick={handleFeature2}>Legal Advisory Section</button>
+            <br /><br />
+            <button onClick={handleFeature1}>Join or Create Room</button>
+            <button onClick={handleFeature2}>Legal Advisory Section</button>
             <ToastContainer />
         </div>
-    )
+    );
 }
 
-export default Home
+export default Home;

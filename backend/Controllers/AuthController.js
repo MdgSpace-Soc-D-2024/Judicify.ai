@@ -13,8 +13,9 @@ const signup =async (req, res) => {
         const userModel = new UserModel({ name, email, password})
         userModel.password = await bcrypt.hash(password, 10)
         await userModel.save()
+        const user2 = await UserModel.findOne({email})
         const jwtToken = jwt.sign(
-            {email: userModel.email, _id:userModel._id, judge:user.judge},
+            {email: user2.email, _id:user2._id, judge:user2.judge},
             process.env.JWT_SECRET,
             {expiresIn: '1h'}
         )
@@ -29,7 +30,7 @@ const signup =async (req, res) => {
     }catch (err){
         res.status(500)
             .json({
-                message: "Internal server error", success: false
+                message: "Internal server error hora ke", success: false
             })
     }
 }
@@ -48,6 +49,7 @@ const login =async (req, res) => {
             .json({message: "User not exists, Check email and password OR signup first", success: false})
         }
         const jwtToken = jwt.sign(
+            {email: user.email, _id:user._id, judge:user.judge},
             {email: user.email, _id:user._id, judge:user.judge},
             process.env.JWT_SECRET,
             {expiresIn: '1h'}

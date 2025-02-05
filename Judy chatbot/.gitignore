@@ -1,0 +1,6 @@
+chroma/
+.git
+venv/
+.env
+uploads/
+__pycache__/

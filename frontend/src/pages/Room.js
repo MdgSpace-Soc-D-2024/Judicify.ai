@@ -20,6 +20,15 @@ function Room() {
 
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+        setLoggedInUser(localStorage.getItem('loggedinUser'));
+    }, [navigate]);
+
+    useEffect(() => {
+        const token = localStorage.getItem('jwtToken');
         if (token) {
             try {
                 const decodedPayload = jwtDecode(token);
@@ -63,7 +72,9 @@ function Room() {
             <button onClick={handleLogout}>Logout</button>
             <br /><br />
             <button onClick={handleJoinRoom}>Join a Room</button>
+            {isJudge && (
             <button onClick={handleCreateRoom}>Create a Room</button>
+            )}
             <button onClick={handleHome}>Home</button>
             <ToastContainer />
         </div>
