@@ -10,11 +10,6 @@ import Room from './pages/Room.js';
 import JoinRoom from './pages/JoinRoom.js';
 import CreateR from './pages/CreateRoom.js';
 import ChatRoom from './pages/ChatRoom.js';
-import Advisory from './pages/Advisory.js';
-import Room from './pages/Room.js';
-import JoinRoom from './pages/JoinRoom.js';
-import CreateR from './pages/CreateRoom.js';
-import ChatRoom from './pages/ChatRoom.js';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
